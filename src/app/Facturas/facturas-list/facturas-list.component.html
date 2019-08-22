@@ -1,0 +1,82 @@
+<h1>Facturas</h1> 
+<div class="flex-p"> 
+    <div *ngIf="dataSource.loading$ | async" fxLayout="column" fxLayoutAlign="center center" >   
+            <mat-spinner color="primary"></mat-spinner>    
+    </div>
+    <div *ngIf="dataSource.error$ | async" fxLayout="column" fxLayoutAlign="center center" >
+            <span>{{dataSource.errorMessage$ | async}}</span>
+        </div>
+    <mat-table #table [dataSource]="dataSource" [hidden]="dataSource.loading$" class="mat-elevation-z8" > 
+        <ng-container matColumnDef="id">
+                    <div *matHeaderCellDef>{{ constants.id }}</div>
+                    <div *matCellDef="let factura">{{factura.id}}</div>
+        </ng-container>       
+        <ng-container matColumnDef="codigoFactura">            
+            <mat-header-cell *matHeaderCellDef > {{ constants.codigoFactura }} </mat-header-cell>
+            <mat-cell *matCellDef="let factura">{{factura.codigoFactura}}
+            </mat-cell>            
+        </ng-container>   
+        <ng-container matColumnDef="cliente">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.cliente }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.cliente}}
+                </mat-cell> 
+        </ng-container>
+        <ng-container matColumnDef="ciudad">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.ciudad }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.ciudad}}
+                </mat-cell> 
+        </ng-container>   
+        <ng-container matColumnDef="nit">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.nit }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.nit}}
+                </mat-cell> 
+        </ng-container>    
+        <ng-container matColumnDef="totalFactura">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.totalFactura }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.totalFactura| currency:companyCurrency:'symbol':'1.2-2'}}                </mat-cell> 
+        </ng-container>  
+        <ng-container matColumnDef="subTotal">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.subTotal }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.subTotal| currency:companyCurrency:'symbol':'1.2-2'}}
+                </mat-cell> 
+        </ng-container> 
+        <ng-container matColumnDef="iva">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.iva }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.iva| currency:companyCurrency:'symbol':'1.2-2'}}
+                </mat-cell> 
+        </ng-container>   
+        <ng-container matColumnDef="retencion">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.retencion }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.retencion| currency:companyCurrency:'symbol':'1.2-2'}}
+                </mat-cell> 
+        </ng-container> 
+        <ng-container matColumnDef="fechaCreacion">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.fechaCreacion }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.fechaCreacion}}
+                </mat-cell> 
+        </ng-container>  
+        <ng-container matColumnDef="estado">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.estado }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.estado}}
+                </mat-cell> 
+        </ng-container> 
+        <ng-container matColumnDef="pagada">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.pagada }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">
+                        <span class="dev-color-red" [hidden]="factura.pagada=='true'">{{ constants.no }}</span>
+                        <span class="dev-color-green" [hidden]="factura.pagada=='false'">{{ constants.si }}</span>
+                </mat-cell>               
+        </ng-container> 
+        <ng-container matColumnDef="fechaPago">                
+                <mat-header-cell *matHeaderCellDef > {{ constants.fechaPago }} </mat-header-cell>
+                <mat-cell *matCellDef="let factura">{{factura.fechaPago}}
+                </mat-cell> 
+        </ng-container>                        
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    </mat-table>   
+</div>
+<br>
+<button (click)="revisarFacturas()" mat-button style="color: cornflowerblue;align-content: center;">Revisar facturas!
+
+</button>
