@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FacturasListComponent } from './Facturas/facturas-list/facturas-list.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'factura', pathMatch: 'full' },
+  { path: '', redirectTo: 'factura', pathMatch: 'full' },
   { path: 'factura', component: FacturasListComponent },
 
 ];
